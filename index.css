@@ -2,3 +2,7 @@ table{
     border-style: solid;
     border: 1px;
 }
+#store{
+    position: absolute;
+    left: 100px;    
+}
