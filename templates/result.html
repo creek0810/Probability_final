@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.12/c3.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.12/c3.js"></script>
+    <script src='{{ url_for("static",filename="result.js")}}'></script>
+    <link rel='stylesheet' href='{{ url_for("static",filename="result.css")}}'>
+</head>
+<body>
+    <span id="date">{{date}}</span>
+    <select value="city" id="city">
+        {% for i in city %}
+            <option value='{{i}}'>{{i}}</option>
+        {% endfor %}
+    </select>
+    <input type="button" value="query" id="query">
+    <div class="chart_container">
+        <div id="humidity_chart" class="chart"></div>
+        <div id="pre_chart" class="chart"></div>
+    </div>
+    <div class="chart_container">
+        <div id="humidity_scatter" class="chart"></div>
+        <div id="temp_scatter" class="chart"></div>
+    </div>
+    <div class="pearson" style="display: none">
+        濕度和降雨量之相關係數:<span id="humidity_coef"></span><br>
+        溫度和降雨量之相關係數:<span id="temp_coef"></span><br>
+    </div>
+</body>
+</html>
