@@ -4,31 +4,81 @@
     <meta charset="UTF-8">
     <title>Result</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.12/c3.css">
+    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- boot strap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <!-- ds & c3 -->
     <script src="http://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.12/c3.js"></script>
+    <!-- local -->
     <script src='{{ url_for("static",filename="result.js")}}'></script>
     <link rel='stylesheet' href='{{ url_for("static",filename="result.css")}}'>
 </head>
 <body>
-    <span id="date">{{date}}</span>
-    <select value="city" id="city">
-        {% for i in city %}
-            <option value='{{i}}'>{{i}}</option>
-        {% endfor %}
-    </select>
-    <input type="button" value="query" id="query">
-    <div class="chart_container">
-        <div id="humidity_chart" class="chart"></div>
-        <div id="pre_chart" class="chart"></div>
-    </div>
-    <div class="chart_container">
-        <div id="humidity_scatter" class="chart"></div>
-        <div id="temp_scatter" class="chart"></div>
-    </div>
-    <div class="pearson" style="display: none">
-        濕度和降雨量之相關係數:<span id="humidity_coef"></span><br>
-        溫度和降雨量之相關係數:<span id="temp_coef"></span><br>
+    <div class="container-fluid">
+        <h1 id="date">{{date}}</h1>
+        <select value="city" id="city">
+            {% for i in city %}
+                <option value='{{i}}'>{{i}}</option>
+            {% endfor %}
+        </select>
+        <button id="query" class="btn btn-primary" style="margin-left: 5px">query</button>
+        <div class="row">
+            <div class="col-md-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">項目</th>
+                            <th scope="col">數值</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>濕度和降雨量之相關係數</th>
+                            <td id="humidity_coef"></td>
+                        </tr>
+                        <tr>
+                            <td>溫度和降雨量之相關係數</th>
+                            <td id="temp_coef"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="">在</label>
+                    <select value="choose_day" id="choose_day" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label for="">天內，降雨量小於</label>
+                    <input type="text" name="" id="tar_precipitation">
+                </div>
+                <div class="form-group">
+                    <label for="">的天數為</label>
+                    <select value="query_day" id="query_day" class="form-control"></select>
+                    <label for="">的機率為何</label>
+                </div>
+            </form>
+            <button class="btn btn-primary" id="query_prob">query</button>
+        </div>
+        <div class="row">
+            ans: <span id='prob_ans'></span>
+        </div>
+        <div class="row">
+            <div class="chart_container">
+                <div class="chart" id="humidity_chart"></div>
+                <div class="chart" id="pre_chart"></div>
+            </div>
+            <div class="chart_container">
+                <div id="humidity_scatter" class="chart"></div>
+                <div id="temp_scatter" class="chart"></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

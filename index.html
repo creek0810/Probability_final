@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,11 +16,14 @@
     <input type="button" id="query" value="query">
     <select name="select2" id="select2"></select>
     <select name="function" id="function">
+        <option value="mid">平均值</option>
         <option value="mid">中位數</option>
     </select>
     <input type="button" id="cal" value="cal">
-    <table id="store"></table>
-    <table id="data"></table>
+    <table>
+        <thead id="heading"></thead>
+        <tbody id="data"></tbody>
+    </table>
     
     
 </body>
